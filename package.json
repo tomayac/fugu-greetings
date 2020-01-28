@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint ./src/*.mjs --fix && npx eslint ./src/*.js --fix"
+    "start": "npx http-server",
+    "lint:js": "npx eslint ./public/js/*.mjs --fix && npx eslint ./public/*.js --fix",
+    "lint:css": "npx stylelint ./public/css/*.css --fix",
+    "lint": "npm run lint:js && npm run lint:css"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,9 @@
     "eslint-config-google": "^0.14.0",
     "http-server": "^0.12.1",
     "shx": "^0.3.2",
-    "terser": "^4.6.3"
+    "terser": "^4.6.3",
+    "stylelint": "^13.0.0",
+    "stylelint-config-standard": "^19.0.0"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -31,5 +36,24 @@
     "extends": [
       "google"
     ]
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "selector-type-no-unknown": [
+        true,
+        {
+          "ignore": [
+            "custom-elements"
+          ]
+        }
+      ],
+      "property-no-unknown": [
+        true,
+        {
+          "ignoreProperties": []
+        }
+      ]
+    }
   }
 }

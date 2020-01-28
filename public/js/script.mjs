@@ -26,7 +26,7 @@ const loadDarkMode = async () => {
     ({
       canvasBackground: CANVAS_BACKGROUND,
       canvasColor: CANVAS_COLOR,
-    } = await import('./dark_mode.mjs'));
+    } = await import('/js/dark_mode.mjs'));
   } else {
     CANVAS_BACKGROUND = '#ffffff';
     CANVAS_COLOR = '#000000';
@@ -162,58 +162,58 @@ window.addEventListener('resize', () => {
 
 const loadShare = () => {
   if ('share' in navigator && 'canShare' in navigator) {
-    import('./share.mjs');
+    import('/js/share.mjs');
   }
 };
 
 const loadContacts = () => {
   if ('contacts' in navigator) {
-    import('./contacts.mjs');
+    import('/js/contacts.mjs');
   }
 };
 
 const loadImportAndExport = () => {
   if ('chooseFileSystemEntries' in window) {
     Promise.all([
-      import('./import_image.mjs'),
-      import('./export_image.mjs'),
+      import('/js/import_image.mjs'),
+      import('/js/export_image.mjs'),
     ]);
   } else {
     Promise.all([
-      import('./import_image_legacy.mjs'),
-      import('./export_image_legacy.mjs'),
+      import('/js/import_image_legacy.mjs'),
+      import('/js/export_image_legacy.mjs'),
     ]);
   }
 };
 
 const loadClipboard = () => {
   if ('clipboard' in navigator && 'write' in navigator.clipboard) {
-    import('./clipboard.mjs');
+    import('/js/clipboard.mjs');
   }
 };
 
 const loadBadge = () => {
   if ('setExperimentalAppBadge' in navigator || 'setAppBadge' in navigator) {
-    import('./badge.mjs');
+    import('/js/badge.mjs');
   }
 };
 
 const loadBarcodeDetection = () => {
   if ('BarcodeDetector' in window) {
-    import('./barcodes.mjs');
+    import('/js/barcodes.mjs');
   }
 };
 
 const loadWakeLock = () => {
   if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
-    import('./wake_lock.mjs');
+    import('/js/wake_lock.mjs');
   }
 };
 
 const serviceWorkerSupported = 'serviceWorker' in navigator;
 const loadServiceWorker = () => {
   if (serviceWorkerSupported) {
-    import('./register_sw.mjs');
+    import('/js/register_sw.mjs');
   }
 };
 
@@ -227,26 +227,26 @@ const getRegistration = async () => {
 const loadPeriodicBackgroundSync = async () => {
   const registration = await getRegistration();
   if (registration && 'periodicSync' in registration) {
-    import('./periodic_background_sync.mjs');
+    import('/js/periodic_background_sync.mjs');
   }
 };
 
 const loadContentIndexing = async () => {
   const registration = await getRegistration();
   if (registration && 'index' in registration) {
-    import('./content_indexing.mjs');
+    import('/js/content_indexing.mjs');
   }
 };
 
 const loadIdleDetection = async () => {
   if ('IdleDetector' in window) {
-    import('./idle_detection.mjs');
+    import('/js/idle_detection.mjs');
   }
 };
 
 const loadFileHandling = async () => {
   if ('launchParams' in window) {
-    import('./file_handling.mjs');
+    import('/js/file_handling.mjs');
   }
 };
 

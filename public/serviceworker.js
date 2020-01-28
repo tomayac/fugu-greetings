@@ -4,9 +4,9 @@ const MEDIA_CACHE = 'media-1572613497296';
 const APP_SHELL_FILES = [
   '/',
   '/index.html',
-  '/script.mjs',
-  '/style.css',
-  '/manifest.webmanifest',
+  '/js/script.mjs',
+  '/css/style.css',
+  '/assets/manifest.webmanifest',
   '/assets/fugu.png',
 ];
 

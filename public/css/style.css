@@ -22,9 +22,10 @@ body {
   overflow-x: auto;
 }
 
-input, button {
+input,
+button {
   font-size: 100%;
-  margin: 0 0.25rem; 
+  margin: 0 0.25rem;
   padding: 0;
 }
 
@@ -33,7 +34,7 @@ input[type="color"] {
 }
 
 input[type="color"],
-button {  
+button {
   display: block;
 }
 
@@ -52,6 +53,10 @@ label {
   user-select: none;
 }
 
+canvas {
+  display: block;
+}
+
 #share,
 #contacts,
 #copy,
@@ -66,7 +71,7 @@ label[for="ephemeral"],
 }
 
 @media (prefers-color-scheme: dark) {
-  canvas {    
+  canvas {
     background-color: #000;
     width: 100%;
     height: 100%;
