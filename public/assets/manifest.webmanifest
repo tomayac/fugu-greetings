@@ -6,7 +6,7 @@
   "orientation": "portrait",
   "display": "standalone",
   "icons": [{
-    "src": "/assets/fugu.png",
+    "src": "./assets/fugu.png",
     "type": "image/png",
     "sizes": "160x160"
   }],

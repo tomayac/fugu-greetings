@@ -15,7 +15,7 @@ const updateContentIndex = async () => {
     title: 'Image of the Day',
     description: 'See today\'s featured background image',
     icons: [{
-      src: '/assets/fugu.png',
+      src: './assets/fugu.png',
       sizes: '160x160',
       type: 'image/png',
     }],
