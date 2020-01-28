@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      if (location.protocol !== "https:") location.protocol = "https:";
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/script.mjs"></script>
+    <link rel="modulepreload" href="/dark_mode.mjs">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="shortcut icon" href="/assets/fugu.png">
+    <title>Fugu Greetings</title>
+  </head>
+  <body>
+    <div class="toolbar">
+      <input id="color" type="color" aria-label="select pen color">
+
+      <input id="size" type="range" min="2" max="50" value="25" aria-label="select pen size">
+      <label for="size">25</label>
+
+      <button id="clear" type="button">Clear</button>
+
+      <button id="import" type="button">Import</button>
+
+      <button id="export" type="button">Export</button>
+
+      <button id="share" type="button">Share</button>
+
+      <button id="contacts" type="button">Contacts</button>
+
+      <button id="copy" type="button">Copy</button>
+
+      <button id="paste" type="button">Paste</button>
+
+      <button id="scan" type="button">Scan</button>
+
+      <button id="periodicbackgroundsync" type="button">Wallpaper</button>
+
+      <input id="wakelock" type="checkbox">
+      <label for="wakelock">Insomnia</label>
+
+      <input id="ephemeral" type="checkbox">
+      <label for="ephemeral">Ephemeral</label>
+    </div>
+
+    <canvas></canvas>
+  </body>
+</html>

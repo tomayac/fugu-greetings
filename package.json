@@ -1,0 +1,35 @@
+{
+  "name": "fugu-greetings",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint ./src/*.mjs --fix && npx eslint ./src/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomayac/fugu-greetings.git"
+  },
+  "author": "Thomas Steiner (https://blog.tomayac.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tomayac/fugu-greetings/issues"
+  },
+  "homepage": "https://github.com/tomayac/fugu-greetings#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "http-server": "^0.12.1",
+    "shx": "^0.3.2",
+    "terser": "^4.6.3"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "extends": [
+      "google"
+    ]
+  }
+}
