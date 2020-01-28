@@ -9,6 +9,9 @@
     "lint:css": "npx stylelint ./public/css/*.css --fix",
     "lint": "npm run lint:js && npm run lint:css"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tomayac/fugu-greetings.git"
@@ -23,10 +26,11 @@
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "http-server": "^0.12.1",
+    "pre-commit": "^1.2.2",
     "shx": "^0.3.2",
-    "terser": "^4.6.3",
     "stylelint": "^13.0.0",
-    "stylelint-config-standard": "^19.0.0"
+    "stylelint-config-standard": "^19.0.0",
+    "terser": "^4.6.3"
   },
   "eslintConfig": {
     "parserOptions": {

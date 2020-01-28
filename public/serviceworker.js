@@ -2,16 +2,16 @@ const APP_SHELL_CACHE = 'app-shell-1572613497211';
 const MEDIA_CACHE = 'media-1572613497296';
 
 const APP_SHELL_FILES = [
-  '/',
-  '/index.html',
-  '/js/script.mjs',
-  '/css/style.css',
-  '/assets/manifest.webmanifest',
-  '/assets/fugu.png',
+  './',
+  './index.html',
+  './js/script.mjs',
+  './css/style.css',
+  './assets/manifest.webmanifest',
+  './assets/fugu.png',
 ];
 
 const MEDIA_FILES = [
-  '/assets/default_background.jpg',
+  './assets/default_background.jpg',
 ];
 
 const ALL_CACHES = [APP_SHELL_CACHE, MEDIA_CACHE];
@@ -47,7 +47,7 @@ self.addEventListener('fetch', (fetchEvent) => {
 });
 
 if ('periodicSync' in self.registration) {
-  importScripts('image_of_the_day.mjs');
+  importScripts('./image_of_the_day.mjs');
 
   self.addEventListener('periodicsync', (syncEvent) => {
     if (syncEvent.tag === 'image-of-the-day-sync') {
