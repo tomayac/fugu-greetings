@@ -7,8 +7,8 @@ const copy = async (blob) => {
         [blob.type]: blob,
       }),
     ]);
-  } catch (e) {
-    console.error(e, e.message);
+  } catch (err) {
+    console.error(err.name, err.message);
   }
 };
 
@@ -21,12 +21,12 @@ const paste = async () => {
           const blob = await clipboardItem.getType(type);
           return blob;
         }
-      } catch (e) {
-        console.error(e, e.message);
+      } catch (err) {
+        console.error(err.name, err.message);
       }
     }
-  } catch (e) {
-    console.error(e, e.message);
+  } catch (err) {
+    console.error(err.name, err.message);
   }
 };
 
