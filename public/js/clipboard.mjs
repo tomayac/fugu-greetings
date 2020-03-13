@@ -31,10 +31,11 @@ const paste = async () => {
 };
 
 copyButton.style.display = 'block';
-pasteButton.style.display = 'block';
 copyButton.addEventListener('click', async () => {
   await copy(await toBlob());
 });
+
+pasteButton.style.display = 'block';
 pasteButton.addEventListener('click', async () => {
   const image = new Image();
   image.addEventListener('load', () => {
@@ -42,5 +43,3 @@ pasteButton.addEventListener('click', async () => {
   });
   image.src = URL.createObjectURL(await paste());
 });
-
-
