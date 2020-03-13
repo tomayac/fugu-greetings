@@ -19,5 +19,7 @@ const importImage = async () => {
 
 importButton.addEventListener('click', async () => {
   const file = await importImage();
-  await drawBlob(file);
+  if (file) {
+    await drawBlob(file);
+  }
 });

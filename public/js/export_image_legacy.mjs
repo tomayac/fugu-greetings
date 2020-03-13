@@ -7,6 +7,7 @@ export const exportImage = async (blob) => {
   a.href = URL.createObjectURL(blob);
   a.addEventListener('click', (e) => {
     a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
   });
   setTimeout(() => a.click(), 0);
 };
