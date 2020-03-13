@@ -48,22 +48,4 @@ self.addEventListener('fetch', (fetchEvent) => {
 
 if ('periodicSync' in self.registration) {
   importScripts('./image_of_the_day.mjs');
-
-  self.addEventListener('periodicsync', (syncEvent) => {
-    if (syncEvent.tag === 'image-of-the-day-sync') {
-      syncEvent.waitUntil((async () => {
-        try {
-          const blob = await getImageOfTheDay();
-          const clients = await self.clients.matchAll();
-          clients.forEach((client) => {
-            client.postMessage({
-              image: blob,
-            });
-          });
-        } catch (err) {
-          console.error(err.name, err.message);
-        }
-      })());
-    }
-  });
 }
