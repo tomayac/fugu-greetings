@@ -10,7 +10,7 @@ const requestWakeLock = async () => {
     });
     console.log('Wake Lock is active');
   } catch (err) {
-    console.error(`${err.name}, ${err.message}`);
+    console.error(err.name, err.message);
   }
 };
 
