@@ -3,7 +3,7 @@ import {exportButton, toBlob} from './script.mjs';
 const exportImage = async (blob) => {
   try {
     const handle = await window.chooseFileSystemEntries({
-      type: 'saveFile',
+      type: 'save-file',
       accepts: [{
         description: 'Image file',
         extensions: ['png'],
