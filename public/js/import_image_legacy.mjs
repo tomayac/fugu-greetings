@@ -10,8 +10,6 @@ const importImage = async () => {
       input.remove();
       return resolve(file);
     });
-    input.style.display = 'none';
-    document.body.appendChild(input);
     input.click();
   });
 };
