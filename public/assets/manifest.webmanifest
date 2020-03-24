@@ -16,5 +16,16 @@
       "name": "Image file",
       "accept": ["image/*", "jpg", "jpeg", "png", "webp", "svg"]
     }]
+  },
+  "share_target": {
+    "action": "/share-target/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [{
+        "name": "image",
+        "accept": ["image/jpeg", "image/jpg", "image/png", "image/webp"]
+      }]
+    }
   }
 }
