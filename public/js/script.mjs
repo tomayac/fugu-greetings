@@ -228,7 +228,7 @@ const loadIdleDetection = async () => {
 
 const loadFileHandling = async () => {
   if ('launchParams' in window) {
-    import('./js/file_handling.mjs');
+    import('./file_handling.mjs');
   }
 };
 
