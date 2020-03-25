@@ -39,7 +39,7 @@ self.addEventListener('activate', (activateEvent) => {
 });
 
 self.addEventListener('fetch', (fetchEvent) => {
-  // Start Web Share Target 🐡
+  /* 🐡 Start Web Share Target */
   if (fetchEvent.request.url.endsWith('/share-target/')) {
     return fetchEvent.respondWith((async () => {
       const formData = await fetchEvent.request.formData();
@@ -47,11 +47,11 @@ self.addEventListener('fetch', (fetchEvent) => {
       const keys = await caches.keys();
       const mediaCache = await caches
           .open(keys.filter((key) => key.startsWith('media'))[0]);
-      await mediaCache.put('background.jpg', new Response(image));
-      return Response.redirect('/', 303);
+      await mediaCache.put('shared-image', new Response(image));
+      return Response.redirect('/?share-target', 303);
     })());
   }
-  // End Web Share Target
+  /* 🐡 End Web Share Target */
 
   fetchEvent.respondWith((async () => {
     const request = fetchEvent.request;
