@@ -65,7 +65,6 @@ colorInput.addEventListener('input', () => {
 new PointerTracker(canvas, {
   start(pointer, event) {
     event.preventDefault();
-    ctx.lineWidth = size;
     ctx.lineCap = 'round';
     return true;
   },
@@ -78,6 +77,7 @@ new PointerTracker(canvas, {
           previous.nativePointer.offsetY,
       );
       for (const point of pointer.getCoalesced()) {
+        ctx.lineWidth = size * point.nativePointer.pressure;
         ctx.lineTo(point.nativePointer.offsetX, point.nativePointer.offsetY);
       }
       ctx.stroke();
