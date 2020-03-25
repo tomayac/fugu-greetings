@@ -1,4 +1,4 @@
-import PointerTracker from './PointerTracker.mjs';
+import PointerTracker from '../web_modules/pointer-tracker.js';
 
 const canvas = document.querySelector('canvas');
 const colorInput = document.querySelector('#color');

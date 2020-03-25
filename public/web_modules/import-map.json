@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "pointer-tracker": "./pointer-tracker.js"
+  }
+}
