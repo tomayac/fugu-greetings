@@ -16,6 +16,8 @@ const ephemeralInput = document.querySelector('#ephemeral');
 const ephemeralLabel = document.querySelector('label[for="ephemeral"]');
 const periodicBackgroundSyncButton = document.querySelector(
     '#periodicbackgroundsync');
+const notificationTriggersButton = document.querySelector(
+    '#notificationtriggers');
 const toolbar = document.querySelector('.toolbar');
 
 let CANVAS_BACKGROUND = null;
@@ -256,6 +258,12 @@ const loadPWACompat = () => {
   }
 };
 
+const loadNotificationTriggers = () => {
+  if ('Notification' in window && 'showTrigger' in Notification.prototype) {
+    import('./notification_triggers.mjs');
+  }
+};
+
 (async () => {
   await Promise.all([
     loadShare(),
@@ -268,6 +276,7 @@ const loadPWACompat = () => {
     loadWakeLock(),
     loadIdleDetection(),
     loadFileHandling(),
+    loadNotificationTriggers(),
     loadPWACompat(),
     loadPeriodicBackgroundSync(),
     loadContentIndexing(),
@@ -295,6 +304,7 @@ export {
   ephemeralInput,
   ephemeralLabel,
   periodicBackgroundSyncButton,
+  notificationTriggersButton,
   // Functions:
   clearCanvas,
   toBlob,

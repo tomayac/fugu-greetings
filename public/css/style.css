@@ -66,7 +66,8 @@ canvas {
 label[for="wakelock"],
 #ephemeral,
 label[for="ephemeral"],
-#periodicbackgroundsync {
+#periodicbackgroundsync,
+#notificationtriggers {
   display: none;
 }
 
