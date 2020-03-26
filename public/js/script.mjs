@@ -126,6 +126,21 @@ const toBlob = async () => {
   });
 };
 
+const getMediaCache = async () => {
+  const keys = await caches.keys();
+  return await caches.open(keys.filter((key) => key.startsWith('media'))[0]);
+};
+
+const restoreImageFromShare = async () => {
+  const mediaCache = await getMediaCache();
+  const image = await mediaCache.match('shared-image');
+  if (image) {
+    const blob = await image.blob();
+    await drawBlob(blob);
+    await mediaCache.delete('shared-image');
+  }
+};
+
 (async () => {
   await loadDarkMode();
   colorInput.value = CANVAS_COLOR;
@@ -134,6 +149,10 @@ const toBlob = async () => {
   sizeLabel.textContent = size;
   resizeCanvas();
   clearCanvas();
+  if (location.search.includes('share-target')) {
+    restoreImageFromShare();
+  }
+  draw();
 })();
 
 let debounce = null;
