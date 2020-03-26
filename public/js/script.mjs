@@ -99,7 +99,15 @@ const putImageData = (imageData) => {
 };
 
 const drawImage = (image) => {
-  ctx.drawImage(image, 0, 0);
+  const imageRatio = image.width / image.height;
+  const canvasRatio = canvas.width / canvas.height;
+  const sw =
+    imageRatio < canvasRatio ? image.width : image.height * canvasRatio;
+  const sh =
+    imageRatio < canvasRatio ? image.width / canvasRatio : image.height;
+  const sx = (image.width - sw) * 0.5;
+  const sy = (image.height - sh) * 0.5;
+  ctx.drawImage(image, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
 };
 
 const drawBlob = async (blob) => {
