@@ -141,6 +141,12 @@ const restoreImageFromShare = async () => {
   }
 };
 
+const drawDefaultImage = async () => {
+  const response = await fetch('assets/fugu_greeting_card.jpg');
+  const blob = await response.blob();
+  await drawBlob(blob);
+};
+
 (async () => {
   await loadDarkMode();
   colorInput.value = CANVAS_COLOR;
@@ -151,6 +157,8 @@ const restoreImageFromShare = async () => {
   clearCanvas();
   if (location.search.includes('share-target')) {
     restoreImageFromShare();
+  } else {
+    drawDefaultImage();
   }
   draw();
 })();

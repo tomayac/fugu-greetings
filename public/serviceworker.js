@@ -12,6 +12,7 @@ const APP_SHELL_FILES = [
 
 const MEDIA_FILES = [
   './assets/default_background.jpg',
+  './assets/fugu_greeting_card.jpg',
 ];
 
 const ALL_CACHES = [APP_SHELL_CACHE, MEDIA_CACHE];
