@@ -160,7 +160,6 @@ const drawDefaultImage = async () => {
   } else {
     drawDefaultImage();
   }
-  draw();
 })();
 
 let debounce = null;
