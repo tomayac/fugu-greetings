@@ -16,8 +16,10 @@ const ephemeralInput = document.querySelector('#ephemeral');
 const ephemeralLabel = document.querySelector('label[for="ephemeral"]');
 const periodicBackgroundSyncButton = document.querySelector(
     '#periodicbackgroundsync');
-const notificationTriggersButton = document.querySelector(
+const notificationTriggersInput = document.querySelector(
     '#notificationtriggers');
+const notificationTriggersLabel = document.querySelector(
+    'label[for="notificationtriggers"]');
 const toolbar = document.querySelector('.toolbar');
 
 let CANVAS_BACKGROUND = null;
@@ -299,12 +301,13 @@ export {
   clearButton,
   shareButton,
   scanButton,
+  periodicBackgroundSyncButton,
+  notificationTriggersInput,
+  notificationTriggersLabel,
   wakeLockInput,
   wakeLockLabel,
   ephemeralInput,
   ephemeralLabel,
-  periodicBackgroundSyncButton,
-  notificationTriggersButton,
   // Functions:
   clearCanvas,
   toBlob,
