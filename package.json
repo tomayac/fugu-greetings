@@ -34,6 +34,7 @@
     "terser": "^4.6.3"
   },
   "dependencies": {
+    "@pwabuilder/pwainstall": "^1.5.0",
     "pointer-tracker": "^2.2.1"
   },
   "eslintConfig": {

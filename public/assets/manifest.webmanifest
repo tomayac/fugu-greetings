@@ -6,10 +6,11 @@
   "orientation": "portrait",
   "display": "standalone",
   "icons": [{
-    "src": "./fugu.png",
+    "src": "/assets/fugu.png",
     "type": "image/png",
     "sizes": "160x160"
   }],
+  "description": "From Fugu With Love! Send a greeting card to your loved ones.",
   "file_handler": {
     "action": "/",
     "files": [{
