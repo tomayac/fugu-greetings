@@ -58,13 +58,10 @@ sizeInput.addEventListener('input', () => {
   size = sizeInput.value;
 });
 
-colorInput.addEventListener('input', () => {
-  ctx.strokeStyle = colorInput.value;
-});
-
 new PointerTracker(canvas, {
   start(pointer, event) {
     event.preventDefault();
+    ctx.strokeStyle = colorInput.value;
     ctx.lineCap = 'round';
     return true;
   },
