@@ -50,7 +50,6 @@ const clearCanvas = (colorOrEvent = CANVAS_BACKGROUND) => {
   }
   ctx.fillStyle = CANVAS_BACKGROUND;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = colorInput.value;
 };
 clearButton.addEventListener('click', clearCanvas);
 
