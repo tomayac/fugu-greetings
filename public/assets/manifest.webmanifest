@@ -6,15 +6,27 @@
   "orientation": "portrait",
   "display": "standalone",
   "icons": [{
-    "src": "./fugu.png",
+    "src": "/assets/fugu.png",
     "type": "image/png",
     "sizes": "160x160"
   }],
+  "description": "From Fugu With Love! Send a greeting card to your loved ones.",
   "file_handler": {
     "action": "/",
     "files": [{
       "name": "Image file",
       "accept": ["image/*", "jpg", "jpeg", "png", "webp", "svg"]
     }]
+  },
+  "share_target": {
+    "action": "/share-target/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [{
+        "name": "image",
+        "accept": ["image/jpeg", "image/png", "image/webp", "image/gif"]
+      }]
+    }
   }
 }

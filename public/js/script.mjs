@@ -1,3 +1,6 @@
+import PointerTracker from '../web_modules/pointer-tracker.js';
+import '../web_modules/@pwabuilder/pwainstall.js';
+
 const canvas = document.querySelector('canvas');
 const colorInput = document.querySelector('#color');
 const sizeInput = document.querySelector('#size');
@@ -43,11 +46,6 @@ const ctx = canvas.getContext('2d', {
 });
 
 let size = null;
-let curX = null;
-let curY = null;
-let curPressure = 0.5;
-let pressed = false;
-const TWO_PI = 2 * Math.PI;
 const floor = Math.floor;
 
 const clearCanvas = (colorOrEvent = CANVAS_BACKGROUND) => {
@@ -66,45 +64,31 @@ sizeInput.addEventListener('input', () => {
 });
 
 colorInput.addEventListener('input', () => {
-  ctx.fillStyle = colorInput.value;
+  ctx.strokeStyle = colorInput.value;
 });
 
-canvas.addEventListener('pointerdown', ({offsetX, offsetY, pressure}) => {
-  curX = floor(offsetX);
-  curY = floor(offsetY);
-  curPressure = pressure;
-  canvas.addEventListener('pointermove', pointerMove);
-  canvas.addEventListener('pointerup', pointerUp);
-  pressed = true;
+new PointerTracker(canvas, {
+  start(pointer, event) {
+    event.preventDefault();
+    ctx.lineCap = 'round';
+    return true;
+  },
+  move(previousPointers, changedPointers, event) {
+    for (const pointer of changedPointers) {
+      const previous = previousPointers.find((p) => p.id === pointer.id);
+      ctx.beginPath();
+      ctx.moveTo(
+          previous.nativePointer.offsetX,
+          previous.nativePointer.offsetY,
+      );
+      for (const point of pointer.getCoalesced()) {
+        ctx.lineWidth = size * point.nativePointer.pressure;
+        ctx.lineTo(point.nativePointer.offsetX, point.nativePointer.offsetY);
+      }
+      ctx.stroke();
+    }
+  },
 });
-
-const pointerMove = ({offsetX, offsetY, pressure}) => {
-  curX = floor(offsetX);
-  curY = floor(offsetY);
-  curPressure = pressure;
-};
-
-const pointerUp = () => {
-  pressed = false;
-  curPressure = 0.5;
-  canvas.removeEventListener('pointermove', pointerMove);
-  canvas.removeEventListener('pointerup', pointerUp);
-};
-
-const draw = () => {
-  if (pressed) {
-    ctx.beginPath();
-    ctx.arc(
-        curX,
-        curY,
-        size * curPressure,
-        0,
-        TWO_PI,
-    );
-    ctx.fill();
-  }
-  requestAnimationFrame(draw);
-};
 
 const resizeCanvas = () => {
   canvas.width = window.innerWidth;
@@ -120,7 +104,15 @@ const putImageData = (imageData) => {
 };
 
 const drawImage = (image) => {
-  ctx.drawImage(image, 0, 0);
+  const imageRatio = image.width / image.height;
+  const canvasRatio = canvas.width / canvas.height;
+  const sw =
+    imageRatio < canvasRatio ? image.width : image.height * canvasRatio;
+  const sh =
+    imageRatio < canvasRatio ? image.width / canvasRatio : image.height;
+  const sx = (image.width - sw) * 0.5;
+  const sy = (image.height - sh) * 0.5;
+  ctx.drawImage(image, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
 };
 
 const drawBlob = async (blob) => {
@@ -139,15 +131,40 @@ const toBlob = async () => {
   });
 };
 
+const getMediaCache = async () => {
+  const keys = await caches.keys();
+  return await caches.open(keys.filter((key) => key.startsWith('media'))[0]);
+};
+
+const restoreImageFromShare = async () => {
+  const mediaCache = await getMediaCache();
+  const image = await mediaCache.match('shared-image');
+  if (image) {
+    const blob = await image.blob();
+    await drawBlob(blob);
+    await mediaCache.delete('shared-image');
+  }
+};
+
+const drawDefaultImage = async () => {
+  const response = await fetch('assets/fugu_greeting_card.jpg');
+  const blob = await response.blob();
+  await drawBlob(blob);
+};
+
 (async () => {
   await loadDarkMode();
   colorInput.value = CANVAS_COLOR;
-  ctx.fillStyle = CANVAS_COLOR;
+  ctx.strokeStyle = CANVAS_COLOR;
   size = sizeInput.value;
   sizeLabel.textContent = size;
   resizeCanvas();
   clearCanvas();
-  draw();
+  if (location.search.includes('share-target')) {
+    restoreImageFromShare();
+  } else {
+    drawDefaultImage();
+  }
 })();
 
 let debounce = null;
@@ -250,7 +267,7 @@ const loadIdleDetection = async () => {
 
 const loadFileHandling = async () => {
   if ('launchParams' in window) {
-    import('./js/file_handling.mjs');
+    import('./file_handling.mjs');
   }
 };
 

@@ -4,7 +4,25 @@ const MEDIA_CACHE = 'media-1572613497296';
 const APP_SHELL_FILES = [
   './',
   './index.html',
+  './js/badge.mjs',
+  './js/barcodes.mjs',
+  './js/clipboard.mjs',
+  './js/contacts.mjs',
+  './js/content_indexing.mjs',
+  './js/dark_mode.mjs',
+  './js/export_image.mjs',
+  './js/export_image_legacy.mjs',
+  './js/file_handling.mjs',
+  './js/idle_detection.mjs',
+  './js/import_image.mjs',
+  './js/import_image_legacy.mjs',
+  './js/periodic_background_sync.mjs',
+  './js/register_sw.mjs',
   './js/script.mjs',
+  './js/share.mjs',
+  './js/wake_lock.mjs',
+  './web_modules/@pwabuilder/pwainstall.js',
+  './web_modules/pointer-tracker.js',
   './css/style.css',
   './assets/manifest.webmanifest',
   './assets/fugu.png',
@@ -12,6 +30,7 @@ const APP_SHELL_FILES = [
 
 const MEDIA_FILES = [
   './assets/default_background.jpg',
+  './assets/fugu_greeting_card.jpg',
 ];
 
 const ALL_CACHES = [APP_SHELL_CACHE, MEDIA_CACHE];
@@ -39,6 +58,20 @@ self.addEventListener('activate', (activateEvent) => {
 });
 
 self.addEventListener('fetch', (fetchEvent) => {
+  /* 🐡 Start Web Share Target */
+  if (fetchEvent.request.url.endsWith('/share-target/')) {
+    return fetchEvent.respondWith((async () => {
+      const formData = await fetchEvent.request.formData();
+      const image = formData.get('image');
+      const keys = await caches.keys();
+      const mediaCache = await caches
+          .open(keys.filter((key) => key.startsWith('media'))[0]);
+      await mediaCache.put('shared-image', new Response(image));
+      return Response.redirect('/?share-target', 303);
+    })());
+  }
+  /* 🐡 End Web Share Target */
+
   fetchEvent.respondWith((async () => {
     const request = fetchEvent.request;
     const cacheHitOrMiss = await caches.match(request);

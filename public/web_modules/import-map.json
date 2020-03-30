@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@pwabuilder/pwainstall": "./@pwabuilder/pwainstall.js",
+    "pointer-tracker": "./pointer-tracker.js"
+  }
+}
