@@ -62,11 +62,13 @@ canvas {
 #copy,
 #paste,
 #scan,
+#periodicbackgroundsync,
+#notificationtriggers,
+label[for="notificationtriggers"],
 #wakelock,
 label[for="wakelock"],
 #ephemeral,
-label[for="ephemeral"],
-#periodicbackgroundsync {
+label[for="ephemeral"] {
   display: none;
 }
 
