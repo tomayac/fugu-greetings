@@ -54,7 +54,6 @@ const clearCanvas = (colorOrEvent = CANVAS_BACKGROUND) => {
   }
   ctx.fillStyle = CANVAS_BACKGROUND;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = colorInput.value;
 };
 clearButton.addEventListener('click', clearCanvas);
 
@@ -63,13 +62,10 @@ sizeInput.addEventListener('input', () => {
   size = sizeInput.value;
 });
 
-colorInput.addEventListener('input', () => {
-  ctx.strokeStyle = colorInput.value;
-});
-
 new PointerTracker(canvas, {
   start(pointer, event) {
     event.preventDefault();
+    ctx.strokeStyle = colorInput.value;
     ctx.lineCap = 'round';
     return true;
   },
