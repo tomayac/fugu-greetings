@@ -262,7 +262,7 @@ const loadIdleDetection = async () => {
 };
 
 const loadFileHandling = async () => {
-  if ('launchParams' in window) {
+  if ('launchQueue' in window) {
     import('./file_handling.mjs');
   }
 };
