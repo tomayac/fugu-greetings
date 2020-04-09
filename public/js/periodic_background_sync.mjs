@@ -27,7 +27,7 @@ const getMediaCache = async () => {
 navigator.serviceWorker.addEventListener('message', async (event) => {
   const blob = event.data.image;
   const mediaCache = await getMediaCache();
-  mediaCache.put('background.jpg', new Response(blob));
+  mediaCache.put('./assets/background.jpg', new Response(blob));
   drawBlob(blob);
 });
 
@@ -37,9 +37,9 @@ periodicBackgroundSyncButton.addEventListener('click', async () => {
     await registerPeriodicBackgroundSync();
   }
   const mediaCache = await getMediaCache();
-  let blob = await mediaCache.match(`${location.href}background.jpg`);
+  let blob = await mediaCache.match('./assets/background.jpg');
   if (!blob) {
-    blob = await mediaCache.match('/assets/default_background.jpg');
+    blob = await mediaCache.match('./assets/default_background.jpg');
   }
   drawBlob(await blob.blob());
 });
