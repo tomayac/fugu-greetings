@@ -2,7 +2,7 @@ import {notificationTriggersInput,
   notificationTriggersLabel} from './script.mjs';
 
 const getReminderNotifications = async () => {
-  const registration = await navigator.serviceWorker.getRegistration();
+  const registration = await navigator.serviceWorker.ready;
   return await registration.getNotifications({
     tag: 'reminder',
     includeTriggered: true,
@@ -46,7 +46,7 @@ const promptTargetDate = () => {
 const scheduleNotification = async () => {
   const targetDate = promptTargetDate();
   if (targetDate) {
-    const registration = await navigator.serviceWorker.getRegistration();
+    const registration = await navigator.serviceWorker.ready;
     registration.showNotification('Reminder', {
       tag: 'reminder',
       body: 'It’s time to finish your greeting card!',
