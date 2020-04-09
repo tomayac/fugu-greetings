@@ -18,6 +18,12 @@
       "accept": ["image/*", "jpg", "jpeg", "png", "webp", "svg"]
     }]
   },
+  "file_handlers": [{
+    "action": "./",
+    "accept": {
+      "image/*": ["jpg", "jpeg", "png", "webp", "svg"]
+    }
+  }],
   "share_target": {
     "action": "./share-target/",
     "method": "POST",
