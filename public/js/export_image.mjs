@@ -10,10 +10,16 @@ const exportImage = async (blob) => {
         mimeTypes: ['image/png'],
       }],
     });
-    const writer = await handle.createWriter();
-    await writer.truncate(0);
-    await writer.write(0, blob);
-    await writer.close();
+    if ('create' in handle) {
+      const writer = await handle.createWriter();
+      await writer.truncate(0);
+      await writer.write(0, blob);
+      await writer.close();
+    } else {
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+    }
   } catch (err) {
     console.error(err.name, err.message);
   }
