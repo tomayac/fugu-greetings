@@ -4,6 +4,7 @@ const MEDIA_CACHE = 'media-1572613497296';
 const APP_SHELL_FILES = [
   './',
   './index.html',
+  './manifest.webmanifest',
   './js/badge.mjs',
   './js/barcodes.mjs',
   './js/clipboard.mjs',
@@ -24,7 +25,6 @@ const APP_SHELL_FILES = [
   './web_modules/@pwabuilder/pwainstall.js',
   './web_modules/pointer-tracker.js',
   './css/style.css',
-  './assets/manifest.webmanifest',
   './assets/fugu.png',
 ];
 
