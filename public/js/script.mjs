@@ -1,5 +1,5 @@
 import PointerTracker from '../web_modules/pointer-tracker.js';
-import '../web_modules/@pwabuilder/pwainstall.js';
+// import '../web_modules/@pwabuilder/pwainstall.js';
 
 const canvas = document.querySelector('canvas');
 const colorInput = document.querySelector('#color');
