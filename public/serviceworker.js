@@ -1,5 +1,5 @@
-const APP_SHELL_CACHE = 'app-shell-1572613497214';
-const MEDIA_CACHE = 'media-1572613497299';
+const APP_SHELL_CACHE = 'app-shell-1572613497215';
+const MEDIA_CACHE = 'media-1572613497290';
 
 const APP_SHELL_FILES = [
   './',
@@ -67,7 +67,7 @@ self.addEventListener('fetch', (fetchEvent) => {
       const mediaCache = await caches
           .open(keys.filter((key) => key.startsWith('media'))[0]);
       await mediaCache.put('shared-image', new Response(image));
-      return Response.redirect('/?share-target', 303);
+      return Response.redirect('./?share-target', 303);
     })());
   }
   /* 🐡 End Web Share Target */
