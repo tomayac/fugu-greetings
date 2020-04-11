@@ -10,7 +10,7 @@ const exportImage = async (blob) => {
         mimeTypes: ['image/png'],
       }],
     });
-    if ('create' in handle) {
+    if ('createWriter' in handle) {
       const writer = await handle.createWriter();
       await writer.truncate(0);
       await writer.write(0, blob);
