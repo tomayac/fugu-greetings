@@ -2,9 +2,13 @@
 const getImageOfTheDay = async () => {
   let url = './assets/default_background.jpg';
   try {
-    let fishes = "blowfish, pufferfish, fugu".split(",");
-    let fish = [~~(fishes.length * Math.random())];
-    return await (await fetch(`https://source.unsplash.com/daily?${fish}`)).blob()
+    let fishes = ['blowfish', 'pufferfish', 'fugu'];
+    let fish = fishes[Math.floor(fishes.length * Math.random())];
+    const response = await fetch(`https://source.unsplash.com/daily?${fish}`);
+    if (!response.ok) {
+      throw new Error('Response was', response.status, response.statusText);
+    }
+    return await response.blob();
   } catch (err) {
     console.error(err.name, err.message);
   }
