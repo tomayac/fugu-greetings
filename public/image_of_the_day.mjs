@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const getImageOfTheDay = async () => {
-  let url = './assets/default_background.jpg';
   try {
-    let fishes = ['blowfish', 'pufferfish', 'fugu'];
-    let fish = fishes[Math.floor(fishes.length * Math.random())];
+    const fishes = ['blowfish', 'pufferfish', 'fugu'];
+    const fish = fishes[Math.floor(fishes.length * Math.random())];
     const response = await fetch(`https://source.unsplash.com/daily?${fish}`);
     if (!response.ok) {
       throw new Error('Response was', response.status, response.statusText);
