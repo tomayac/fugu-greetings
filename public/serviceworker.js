@@ -1,5 +1,5 @@
-const APP_SHELL_CACHE = 'app-shell-1572613497215';
-const MEDIA_CACHE = 'media-1572613497290';
+const APP_SHELL_CACHE = 'app-shell-1572613497216';
+const MEDIA_CACHE = 'media-1572613497291';
 
 const APP_SHELL_FILES = [
   './',
@@ -29,7 +29,6 @@ const APP_SHELL_FILES = [
 ];
 
 const MEDIA_FILES = [
-  './assets/default_background.jpg',
   './assets/fugu_greeting_card.jpg',
 ];
 

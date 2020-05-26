@@ -39,7 +39,7 @@ periodicBackgroundSyncButton.addEventListener('click', async () => {
   const mediaCache = await getMediaCache();
   let blob = await mediaCache.match('./assets/background.jpg');
   if (!blob) {
-    blob = await mediaCache.match('./assets/default_background.jpg');
+    blob = await mediaCache.match('./assets/fugu_greeting_card.jpg');
   }
   drawBlob(await blob.blob());
 });
