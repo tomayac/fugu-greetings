@@ -11,7 +11,10 @@ const updateContentIndex = async () => {
   const registration = await navigator.serviceWorker.ready;
   registration.index.add({
     id: backgroundImageKey.url,
+    // Required; url needs to be an offline-capable HTML page.
+    // For compatibility during the Origin Trial, include launchUrl as well.
     launchUrl: backgroundImageKey.url,
+    url: backgroundImageKey.url,
     title: 'Image of the Day',
     description: 'See today\'s featured background image',
     icons: [{
