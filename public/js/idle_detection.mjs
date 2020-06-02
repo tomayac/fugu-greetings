@@ -1,32 +1,43 @@
 import {ephemeralInput, ephemeralLabel, clearCanvas} from './script.mjs';
 
-const idleDetector = new IdleDetector({threshold: 60});
-
-try {
-  idleDetector.addEventListener('change', ({
-    target: {
-      state: {
-        user,
-        screen,
-      },
-    },
-  }) => {
-    console.log(`idle change: ${user}, ${screen}`);
-    if (user === 'idle') {
-      clearCanvas();
-    }
-  });
-} catch (err) {
-  console.error(err.name, err.message);
-}
-
 ephemeralInput.style.display = 'block';
 ephemeralLabel.style.display = 'block';
 
-ephemeralInput.addEventListener('change', () => {
+let controller = null;
+let signal = null;
+ephemeralInput.addEventListener('change', async () => {
   if (ephemeralInput.checked) {
-    idleDetector.start();
+    controller = new AbortController();
+    signal = controller.signal;
+    await detectIdleness(signal);
   } else {
-    idleDetector.stop();
+    controller.abort();
   }
 });
+
+const detectIdleness = async (signal) => {
+  try {
+    const state = await Notification.requestPermission();
+    if (!state === 'granted') {
+      return alert('Idle detection requires the "notifications" permission.');
+    }
+    const idleDetector = new IdleDetector();
+    idleDetector.addEventListener('change', () => {
+      const userState = idleDetector.userState;
+      const screenState = idleDetector.screenState;
+      console.log(`Idle change: ${userState}, ${screenState}.`);
+      if (userState === 'idle') {
+        clearCanvas();
+      }
+    });
+    await idleDetector.start({
+      threshold: 60000,
+      signal,
+    });
+    console.log('IdleDetector is active.');
+  } catch (err) {
+    // Deal with initialization errors like permission denied,
+    // running outside of top-level frame, etc.
+    console.error(err.name, err.message);
+  }
+};
