@@ -210,7 +210,7 @@ const loadClipboard = () => {
 };
 
 const loadBadge = () => {
-  if ('setExperimentalAppBadge' in navigator || 'setAppBadge' in navigator) {
+  if ('setAppBadge' in navigator) {
     import('./badge.mjs');
   }
 };
