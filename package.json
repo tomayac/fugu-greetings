@@ -28,7 +28,7 @@
     "http-server": "^0.12.3",
     "pre-commit": "^1.2.2",
     "shx": "^0.3.2",
-    "snowpack": "^2.2.1",
+    "snowpack": "^2.2.3",
     "stylelint": "^13.5.0",
     "stylelint-config-standard": "^20.0.0",
     "terser": "^4.7.0"
