@@ -11,7 +11,7 @@ const share = async (title, text, blob) => {
     text: text,
   };
   try {
-    if (!(await navigator.canShare(data))) {
+    if (!(navigator.canShare(data))) {
       throw new Error('Can\'t share data.', data);
     };
     await navigator.share(data);

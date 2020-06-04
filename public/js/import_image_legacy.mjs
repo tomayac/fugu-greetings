@@ -4,11 +4,9 @@ const importImage = async () => {
   return new Promise((resolve) => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.accept = 'image/png, image/jpeg, image/*';
+    input.accept = 'image/*';
     input.addEventListener('change', () => {
-      const file = input.files[0];
-      input.remove();
-      return resolve(file);
+      resolve(input.files[0]);
     });
     input.click();
   });

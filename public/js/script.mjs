@@ -122,7 +122,7 @@ const drawBlob = async (blob) => {
 const toBlob = async () => {
   return new Promise((resolve) => {
     canvas.toBlob((blob) => {
-      return resolve(blob);
+      resolve(blob);
     });
   });
 };
