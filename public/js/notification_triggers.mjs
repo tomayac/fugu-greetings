@@ -50,6 +50,7 @@ const scheduleNotification = async () => {
     registration.showNotification('Reminder', {
       tag: 'reminder',
       body: 'It’s time to finish your greeting card!',
+      icon: '/fugu-greetings/public/assets/fugu.png',
       showTrigger: new TimestampTrigger(targetDate),
     });
   } else {
