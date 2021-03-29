@@ -2,14 +2,13 @@ import {importButton, drawBlob} from './script.mjs';
 
 const importImage = async () => {
   try {
-    const handle = await window.chooseFileSystemEntries({
-      accepts: [
-        {
-          description: 'Image files',
-          mimeTypes: ['image/*'],
-          extensions: ['jpg', 'jpeg', 'png', 'webp', 'svg'],
+    const [handle] = await window.showOpenFilePicker({
+      types: [{
+        description: 'Image files',
+        accept: {
+          'image/*': ['.png', '.jpg', '.jpeg', '.avif', '.webp', '.svg'],
         },
-      ],
+      }],
     });
     return await handle.getFile();
   } catch (err) {

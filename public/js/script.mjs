@@ -190,7 +190,7 @@ const loadContacts = () => {
 };
 
 const loadImportAndExport = () => {
-  if ('chooseFileSystemEntries' in window) {
+  if ('showOpenFilePicker' in window) {
     Promise.all([
       import('./import_image.mjs'),
       import('./export_image.mjs'),
