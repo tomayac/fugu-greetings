@@ -1,43 +1,36 @@
 import {ephemeralInput, ephemeralLabel, clearCanvas} from './script.mjs';
 
+let controller;
+
 ephemeralInput.style.display = 'block';
 ephemeralLabel.style.display = 'block';
 
-let controller = null;
-let signal = null;
 ephemeralInput.addEventListener('change', async () => {
   if (ephemeralInput.checked) {
-    controller = new AbortController();
-    signal = controller.signal;
-    await detectIdleness(signal);
+    const state = await IdleDetector.requestPermission();
+    if (state !== 'granted') {
+      ephemeralInput.checked = false;
+      return alert('Idle detection permission must be granted!');
+    }
+    try {
+      controller = new AbortController();
+      const idleDetector = new IdleDetector();
+      idleDetector.addEventListener('change', (e) => {
+        const {userState, screenState} = e.target;
+        console.log(`idle change: ${userState}, ${screenState}`);
+        if (userState === 'idle') {
+          clearCanvas();
+        }
+      });
+      idleDetector.start({
+        threshold: 60000,
+        signal: controller.signal,
+      });
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
   } else {
+    console.log('Idle detection stopped.');
     controller.abort();
   }
 });
-
-const detectIdleness = async (signal) => {
-  try {
-    const state = await Notification.requestPermission();
-    if (!state === 'granted') {
-      return alert('Idle detection requires the "notifications" permission.');
-    }
-    const idleDetector = new IdleDetector();
-    idleDetector.addEventListener('change', () => {
-      const userState = idleDetector.userState;
-      const screenState = idleDetector.screenState;
-      console.log(`Idle change: ${userState}, ${screenState}.`);
-      if (userState === 'idle') {
-        clearCanvas();
-      }
-    });
-    await idleDetector.start({
-      threshold: 60000,
-      signal,
-    });
-    console.log('IdleDetector is active.');
-  } catch (err) {
-    // Deal with initialization errors like permission denied,
-    // running outside of top-level frame, etc.
-    console.error(err.name, err.message);
-  }
-};
