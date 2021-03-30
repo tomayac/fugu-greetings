@@ -1,6 +1,6 @@
 import {exportButton, toBlob} from './script.mjs';
 
-const exportImage = async (blob) => {
+const exportImage = async () => {
   try {
     const handle = await window.showSaveFilePicker({
       suggestedName: 'fugu-greetings.png',
@@ -11,6 +11,7 @@ const exportImage = async (blob) => {
         },
       }],
     });
+    const blob = await toBlob();
     const writable = await handle.createWritable();
     await writable.write(blob);
     await writable.close();
@@ -19,6 +20,7 @@ const exportImage = async (blob) => {
   }
 };
 
+exportButton.style.display = 'block';
 exportButton.addEventListener('click', async () => {
-  exportImage(await toBlob());
+  await exportImage();
 });
