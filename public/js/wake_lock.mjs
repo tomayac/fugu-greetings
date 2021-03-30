@@ -21,7 +21,6 @@ const handleVisibilityChange = () => {
 };
 
 document.addEventListener('visibilitychange', handleVisibilityChange);
-document.addEventListener('fullscreenchange', handleVisibilityChange);
 
 wakeLockInput.style.display = 'block';
 wakeLockLabel.style.display = 'block';
