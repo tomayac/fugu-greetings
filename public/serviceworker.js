@@ -17,6 +17,7 @@ const APP_SHELL_FILES = [
   './js/idle_detection.mjs',
   './js/import_image.mjs',
   './js/import_image_legacy.mjs',
+  './js/notification_triggers.mjs',
   './js/periodic_background_sync.mjs',
   './js/register_sw.mjs',
   './js/script.mjs',
@@ -73,11 +74,10 @@ self.addEventListener('fetch', (fetchEvent) => {
 
   fetchEvent.respondWith((async () => {
     const request = fetchEvent.request;
-    const cacheHitOrMiss = await caches.match(request);
-    return cacheHitOrMiss || fetch(request);
+    return fetch(request).catch(() => caches.match(request));
   })());
 });
 
 if ('periodicSync' in self.registration) {
-  importScripts('./image_of_the_day.mjs');
+  importScripts('./js/image_of_the_day.mjs');
 }

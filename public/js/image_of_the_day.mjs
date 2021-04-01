@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 const getImageOfTheDay = async () => {
   try {
     const fishes = ['blowfish', 'pufferfish', 'fugu'];
@@ -13,15 +12,23 @@ const getImageOfTheDay = async () => {
   }
 };
 
+const getMediaCache = async () => {
+  const keys = await caches.keys();
+  return await caches.open(keys.filter((key) => key.startsWith('media'))[0]);
+};
+
 self.addEventListener('periodicsync', (syncEvent) => {
   if (syncEvent.tag === 'image-of-the-day-sync') {
     syncEvent.waitUntil((async () => {
       try {
         const blob = await getImageOfTheDay();
+        const mediaCache = await getMediaCache();
+        const fakeURL = './assets/background.jpg';
+        await mediaCache.put(fakeURL, new Response(blob));
         const clients = await self.clients.matchAll();
         clients.forEach((client) => {
           client.postMessage({
-            image: blob,
+            image: fakeURL,
           });
         });
       } catch (err) {

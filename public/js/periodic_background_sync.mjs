@@ -19,17 +19,17 @@ const registerPeriodicBackgroundSync = async () => {
   }
 };
 
+navigator.serviceWorker.addEventListener('message', async (event) => {
+  const fakeURL = event.data.image;
+  const mediaCache = await getMediaCache();
+  const response = await mediaCache.match(fakeURL);
+  drawBlob(await response.blob());
+});
+
 const getMediaCache = async () => {
   const keys = await caches.keys();
   return await caches.open(keys.filter((key) => key.startsWith('media'))[0]);
 };
-
-navigator.serviceWorker.addEventListener('message', async (event) => {
-  const blob = event.data.image;
-  const mediaCache = await getMediaCache();
-  mediaCache.put('./assets/background.jpg', new Response(blob));
-  drawBlob(blob);
-});
 
 periodicBackgroundSyncButton.style.display = 'block';
 periodicBackgroundSyncButton.addEventListener('click', async () => {
@@ -37,11 +37,9 @@ periodicBackgroundSyncButton.addEventListener('click', async () => {
     await registerPeriodicBackgroundSync();
   }
   const mediaCache = await getMediaCache();
-  let blob = await mediaCache.match(
-      '/fugu-greetings/public/assets/background.jpg');
+  let blob = await mediaCache.match('./assets/background.jpg');
   if (!blob) {
-    blob = await mediaCache.match(
-        '/fugu-greetings/public/assets/fugu_greeting_card.jpg');
+    blob = await mediaCache.match('./assets/fugu_greeting_card.jpg');
   }
   drawBlob(await blob.blob());
 });
