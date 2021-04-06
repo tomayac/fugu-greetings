@@ -59,7 +59,8 @@ self.addEventListener('activate', (activateEvent) => {
 
 self.addEventListener('fetch', (fetchEvent) => {
   /* 🐡 Start Web Share Target */
-  if (fetchEvent.request.url.endsWith('/share-target/')) {
+  if ((fetchEvent.request.url.endsWith('/share-target/')) &&
+      (fetchEvent.request.method === 'POST')) {
     return fetchEvent.respondWith((async () => {
       const formData = await fetchEvent.request.formData();
       const image = formData.get('image');
