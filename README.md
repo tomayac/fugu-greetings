@@ -5,5 +5,5 @@
 A Progressive Web App that showcases many Project Fugu APIs.
 See the [demo](https://tomayac.github.io/fugu-greetings/public/)
 live and read the corresponding
-[article](https://deploy-preview-3178--web-dev-staging.netlify.app/progressively-enhance-your-pwa/)
+[article](https://web.dev/progressively-enhance-your-pwa/)
 to learn mode about the featured APIs and the progressive enhancement pattern used in the code.
